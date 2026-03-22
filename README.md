@@ -1,67 +1,55 @@
-# Ticker — Stock Market AI Chatbot
+# Ticker - Stock Market AI Chatbot
 
-Ask it anything about the stock market — P/E ratios, candlestick charts, options, Fed policy, ETFs. It answers like a knowledgeable friend, not a textbook.
+**Live:** [ticker-ai-three.vercel.app](https://ticker-ai-three.vercel.app) 
 
-**Live:** [your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)
+## What I built
 
-## Why stocks
+A chatbot that helps you understand the stock market. You can ask it anything from "what is a P/E ratio" to "how does the Fed affect markets" and it gives you a straight answer, no fluff.
 
-Most people feel like they *should* understand the market but never quite got there. There's a lot of noise online — Reddit, Twitter, YouTube — but very little that actually meets you where you are. I wanted to build something that felt like messaging a friend who works in finance.
+The UI is built around the Bloomberg terminal aesthetic - dark, dense, data-forward. The goal was for the interface itself to tell you what kind of tool this is before you even type anything.
+
+## Why this topic
+
+I've been trying to get into investing and kept running into the same problem. Everything online is either too simple or assumes too much. I wanted to build something that actually meets you where you are and explains things clearly.
+
+## Decisions I made
+
+The landing screen shows four cards instead of an empty input. It tells you what the bot is good at so you're not staring at a blank box wondering what to ask.
+
+The ticker tape at the top isn't just decoration. It sets the context before the conversation starts.
+
+The sidebar watchlist is clickable. Each stock fires a prompt about that ticker so the UI does work, not just sits there.
+
+Hint chips below the input (RSI, MACD, VIX, EPS) act as breadcrumbs for beginners and shortcuts for everyone else.
+
+Bot responses auto-color numbers. Positive goes green, negative goes red. Small detail but it makes answers feel like they belong in this interface.
 
 ## Stack
 
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- Groq API — llama-3.3-70b (free, fast)
-- Lucide React
+- Next.js 14, TypeScript
+- Tailwind CSS, no UI library
+- Groq API with llama-3.3-70b
+- Deployed on Vercel
 
-## Run locally
+## Running locally
 
 ```bash
-git clone https://github.com/yourusername/ticker-ai
+git clone https://github.com/lokaesshwar/ticker-ai.git
 cd ticker-ai
 npm install
 ```
 
-Create `.env.local`:
+Add a `.env.local` file:
 ```
-GROQ_API_KEY=gsk_xxxxxxxxxxxx
+GROQ_API_KEY=gsk_your_key_here
 ```
+
+Get a free key at [console.groq.com](https://console.groq.com), then run:
 
 ```bash
 npm run dev
 ```
 
-## Project structure
+## AI usage
 
-```
-app/
-  page.tsx              # main page, all state lives here
-  api/chat/route.ts     # calls Groq, key never hits the client
-components/
-  Header.tsx            # logo + indices + live status
-  TickerTape.tsx        # scrolling prices at the top
-  Sidebar.tsx           # watchlist + quick prompts
-  Message.tsx           # single chat bubble
-  TypingDots.tsx        # loading state
-  Landing.tsx           # shown when chat is empty
-  Input.tsx             # textarea + send + hint chips
-lib/
-  types.ts              # Message, Stock, Index types
-  stocks.ts             # mock ticker/watchlist/index data
-  prompts.ts            # quick prompts, hints, system prompt
-  utils.ts              # cn(), getTime(), renderMessage()
-```
-
-## Deploy
-
-```bash
-npx vercel --prod
-```
-
-Add `GROQ_API_KEY` in Vercel → Settings → Environment Variables, then redeploy.
-
-## Note on AI
-
-Used Claude to help scaffold components. Design decisions, layout, and this README are mine.
+I used Claude to move faster on components and styling. The thinking behind what to build, how the UI should feel, and what makes this more than a chat wrapper was mine. These tools are useful when you know what you want and just need to get there quicker. 
