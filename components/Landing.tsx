@@ -8,7 +8,7 @@ interface Props {
 
 export default function Landing({ onPrompt }: Props) {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center px-6 py-10 text-center fade-up">
+    <div className="min-h-full flex flex-col items-center justify-center px-6 py-10 text-center fade-up">
       
       {/* Icon */}
       <div
